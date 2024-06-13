@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "name": "vibb",
+      "email": "kk@gmail.com",
+      "password": "aa",
+      "phone": "09877309271",
+      "address": "ass",
+      "id": 1
+    },
+    {
+      "name": "ataaa",
+      "email": "kk1@gmail.com",
+      "password": "a",
+      "phone": "999",
+      "address": "udh",
+      "id": 2
+    }
+  ]
+}
