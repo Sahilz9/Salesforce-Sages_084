@@ -31,3 +31,9 @@ tickets.forEach((ticket) => {
         document.querySelector(".count").innerHTML = count;
     })
 })
+
+const bookButton = document.getElementById("bookbutton");
+
+bookButton.addEventListener("click", function() {
+    alert("Tickets Booked Successfully!");
+});
