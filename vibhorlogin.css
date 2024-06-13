@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+}
+
+.toggle-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.toggle-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background: none;
+    border: 2px solid blue;
+
+    transition: border-bottom 0.3s, font-weight 0.3s;
+}
+
+.toggle-button.active {
+    border-bottom: 2px solid #007BFF;
+    font-weight: bold;
+}
+
+.form {
+    display: none;
+}
+
+.form.active {
+    display: block;
+}
+
+input {
+    display: block;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    width: calc(100% - 20px);
+    margin: 10px 10px 0 10px;
+    border: 1px solid black;
+    background-color: #007BFF;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 40px 60px;
+        max-width: 600px;
+    }
+
+    .toggle-button {
+        padding: 15px 30px;
+    }
+
+    input {
+        width: calc(100% - 40px);
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    button {
+        padding: 15px;
+        width: calc(100% - 40px);
+        margin: 15px 20px 0 20px;
+    }
+}
