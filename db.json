@@ -15,6 +15,14 @@
       "phone": "999",
       "address": "udh",
       "id": 2
+    },
+    {
+      "name": "qq",
+      "email": "qq@gmail.com",
+      "password": "aa",
+      "phone": "09",
+      "address": "india",
+      "id": 3
     }
   ]
 }

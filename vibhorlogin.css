@@ -1,19 +1,20 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    color: #fff;
 }
 
 .container {
-    background-color: white;
-    padding: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #444;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    max-width: 500px;
+    max-width: 400px;
     width: 90%;
 }
 
@@ -26,14 +27,14 @@ body {
 .toggle-button {
     padding: 10px 20px;
     cursor: pointer;
-    background: none;
-    border: 2px solid blue;
-
+    background: #007BFF;
+    border: 2px solid #666;
+    color: white;
     transition: border-bottom 0.3s, font-weight 0.3s;
 }
 
 .toggle-button.active {
-    border-bottom: 2px solid #007BFF;
+    border-bottom: 2px solid #666;
     font-weight: bold;
 }
 
@@ -58,22 +59,38 @@ button {
     padding: 10px;
     width: calc(100% - 20px);
     margin: 10px 10px 0 10px;
-    border: 1px solid black;
+    border: 1px solid #666;
     background-color: #007BFF;
-    color: black;
+    color: white;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.terms-container, .confirmation-container {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.terms-container input, .confirmation-container input {
+    display: inline-block;
+    width: auto;
+    margin-right: 10px;
+}
+
+.terms-container label, .confirmation-container label {
+    display: inline-block;
 }
 
 @media (min-width: 768px) {
     .container {
-        padding: 40px 60px;
-        max-width: 600px;
+        padding: 30px 50px;
+        max-width: 500px;
     }
 
     .toggle-button {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login/Signup Page</title>
-    <link rel="stylesheet" href="ab.css">
+    <link rel="stylesheet" href="vibhorlogin.css">
 </head>
 <body>
     <div class="container">
@@ -17,6 +17,10 @@
                 <h2>Login</h2>
                 <input type="email" id="login-email" placeholder="Email" required>
                 <input type="password" id="login-password" placeholder="Password" required>
+                <div class="terms-container">
+                    <input type="checkbox" id="login-terms" required>
+                    <label for="login-terms">I agree to the <a href="#">terms and conditions</a></label>
+                </div>
                 <button type="submit">Login</button>
             </form>
             <form id="signup-form" class="form">
@@ -26,10 +30,18 @@
                 <input type="password" id="signup-password" placeholder="Password" required>
                 <input type="text" id="signup-phone" placeholder="Phone Number" required>
                 <input type="text" id="signup-address" placeholder="City" required>
+                <div class="terms-container">
+                    <input type="checkbox" id="signup-terms" required>
+                    <label for="signup-terms">I agree to the <a href="#">terms and conditions</a></label>
+                </div>
+                <div class="confirmation-container">
+                    <input type="checkbox" id="signup-confirmation" required>
+                    <label for="signup-confirmation">I confirm my information is correct</label>
+                </div>
                 <button type="submit">Signup</button>
             </form>
         </div>
     </div>
-    <script src="ab.js"></script>
+    <script src="vibhorlogin.js"></script>
 </body>
 </html>
