@@ -1,0 +1,50 @@
+{
+  "users": [
+    {
+      "name": "vibb",
+      "email": "kk@gmail.com",
+      "phone": "678",
+      "address": "uuu",
+      "id": 1
+    },
+    {
+      "name": "ataaa",
+      "email": "kk1@gmail.com",
+      "phone": "777",
+      "address": "udh",
+      "id": 2
+    },
+    {
+      "name": "appp1",
+      "email": "cc4@gmail.com",
+      "password": "00",
+      "phone": "8765",
+      "address": "puunhaj",
+      "id": 3
+    },
+    {
+      "name": "syed",
+      "email": "syed@gmail.com",
+      "password": "00",
+      "phone": "7776",
+      "address": "maharashtra",
+      "id": 4
+    },
+    {
+      "name": "dd",
+      "email": "pp@gnai.com",
+      "password": "00",
+      "phone": "222",
+      "address": "kerala",
+      "id": 5
+    },
+    {
+      "name": "anm",
+      "email": "anm@gmail.com",
+      "password": "00",
+      "phone": "12345",
+      "address": "uganmo",
+      "id": 6
+    }
+  ]
+}
