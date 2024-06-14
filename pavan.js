@@ -35,5 +35,5 @@ tickets.forEach((ticket) => {
 const bookButton = document.getElementById("bookbutton");
 
 bookButton.addEventListener("click", function() {
-    alert("Tickets Booked Successfully!");
+    alert("Tickets Booked Successfully !!");
 });
