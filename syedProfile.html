@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="./src/css/style.css">
+
+    <style>
+        :root {
+            --background: #333;
+            --primary-color: #444;
+            --secondary-color: #555;
+            --text-color: #fff;
+            --border-color: #666;
+            --input-border-color: #777;
+        }
+
+        body {
+            background: var(--background);
+            font-family: Arial, sans-serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 50px auto;
+            width: 500px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            background: var(--primary-color);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-info img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .user-details p {
+            margin-bottom: 10px;
+        }
+
+        .user-details span {
+            font-weight: bold;
+        }
+
+        #update-button,
+        #cancel-button,
+        #logout-button {
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.3s;
+        }
+
+        #update-button:hover,
+        #cancel-button:hover,
+        #logout-button:hover {
+            transform: scale(1.1);
+        }
+
+        #edit-profile {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        #edit-profile input {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid var(--input-border-color);
+            border-radius: 5px;
+            width: calc(100% - 22px);
+        }
+
+        #edit-profile button {
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+
+        #edit-profile button:hover {
+            transform: scale(1.025);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile-container">
+        <h2>Profile Page</h2>
+        <div class="profile-info">
+            <img id="profile-picture" src="https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=" alt="Profile Picture">
+            <div class="user-details">
+                <p><span>Name:</span> <span id="user-name"></span></p>
+                <p><span>Email:</span> <span id="user-email"></span></p>
+                <p><span>Phone:</span> <span id="user-phone"></span></p>
+                <p><span>Address:</span> <span id="user-address"></span></p>
+                <button id="update-button">Update</button>
+            </div>
+        </div>
+        <div id="edit-profile">
+            <input type="text" id="edit-name" placeholder="Name">
+            <input type="email" id="edit-email" placeholder="Email">
+            <input type="text" id="edit-phone" placeholder="Phone">
+            <input type="text" id="edit-address" placeholder="Address">
+            <button id="save-button">Save</button>
+            <button id="cancel-button">Cancel</button>
+        </div>
+        <button id="logout-button">Logout</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const profilePicture = document.getElementById('profile-picture');
+            const userName = document.getElementById('user-name');
+            const userEmail = document.getElementById('user-email');
+            const userPhone = document.getElementById('user-phone');
+            const userAddress = document.getElementById('user-address');
+            const updateButton = document.getElementById('update-button');
+            const editProfile = document.getElementById('edit-profile');
+            const saveButton = document.getElementById('save-button');
+            const cancelButton = document.getElementById('cancel-button');
+            const logoutButton = document.getElementById('logout-button');
+
+            const editName = document.getElementById('edit-name');
+            const editEmail = document.getElementById('edit-email');
+            const editPhone = document.getElementById('edit-phone');
+            const editAddress = document.getElementById('edit-address');
+
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
+            if (loggedInUser) {
+                userName.textContent = loggedInUser.name;
+                userEmail.textContent = loggedInUser.email;
+                userPhone.textContent = loggedInUser.phone;
+                userAddress.textContent = loggedInUser.address;
+                editName.value = loggedInUser.name;
+                editEmail.value = loggedInUser.email;
+                editPhone.value = loggedInUser.phone;
+                editAddress.value = loggedInUser.address;
+            } else {
+                alert('No user logged in.');
+                window.location.href = 'login.html';
+            }
+
+            updateButton.addEventListener('click', () => {
+                editProfile.style.display = 'flex';
+            });
+
+            cancelButton.addEventListener('click', () => {
+                editProfile.style.display = 'none';
+            });
+
+            saveButton.addEventListener('click', () => {
+                const updatedUser = {
+                    ...loggedInUser,
+                    name: editName.value,
+                    email: editEmail.value,
+                    phone: editPhone.value,
+                    address: editAddress.value
+                };
+
+                fetch(`http://localhost:3000/users/${loggedInUser.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedUser)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+                    userName.textContent = updatedUser.name;
+                    userEmail.textContent = updatedUser.email;
+                    userPhone.textContent = updatedUser.phone;
+                    userAddress.textContent = updatedUser.address;
+                    editProfile.style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error updating profile:', error);
+                });
+            });
+
+            logoutButton.addEventListener('click', () => {
+                localStorage.removeItem('loggedInUser');
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>
