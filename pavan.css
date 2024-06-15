@@ -214,8 +214,8 @@ input {
 .price button {
     background: hsla(349, 69%, 51%, 1);
     color: white;
-    font-size: 14px;
-    padding: 9px 19px;
+    font-size: 17px;
+    padding: 10px 20px;
     border-radius: 8px;
     outline: none;
     border: none;

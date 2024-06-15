@@ -36,4 +36,5 @@ const bookButton = document.getElementById("bookbutton");
 
 bookButton.addEventListener("click", function() {
     alert("Tickets Booked Successfully !!");
+    window.location.href="index.html"
 });
