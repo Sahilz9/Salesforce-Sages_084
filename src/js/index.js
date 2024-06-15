@@ -218,7 +218,7 @@ function checkLoginStatus(){
   if(userID){
     document.getElementById('loginBtn').style.display = 'none';
   } else{
-    // document.getElementById('loginBtn').style.display = 'none';
+    document.getElementById('userprofile-icon').style.display = 'none';
   }
 }
 
