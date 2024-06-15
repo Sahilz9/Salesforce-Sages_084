@@ -210,3 +210,16 @@ const createMovieList = function ({ results: movieList }, title) {
 
   pageContent.appendChild(movieListElem);
 };
+
+
+function checkLoginStatus(){
+  const userID = localStorage.getItem('userId');
+
+  if(userID){
+    document.getElementById('loginBtn').style.display = 'none';
+  } else{
+    // document.getElementById('loginBtn').style.display = 'none';
+  }
+}
+
+window.onload = checkLoginStatus;
