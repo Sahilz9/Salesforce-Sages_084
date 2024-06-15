@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
-    <link rel="stylesheet" href="./src/css/style.css">
+    <!-- <link rel="stylesheet" href="./src/css/style.css"> -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <style>
         :root {
@@ -36,6 +38,7 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             background: var(--primary-color);
+            position: relative;
         }
 
         .profile-info {
@@ -70,146 +73,211 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
-            transition: transform 0.3s;
+            transition: background-color 0.3s ease;
+            margin: 5px;
         }
 
         #update-button:hover,
         #cancel-button:hover,
         #logout-button:hover {
-            transform: scale(1.1);
+            background-color: darken(var(--secondary-color), 10%);
         }
 
-        #edit-profile {
-            display: none;
-            flex-direction: column;
+        #update-form {
             width: 100%;
+            display: none;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-top: 20px;
+            background: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s ease;
         }
 
-        #edit-profile input {
+        #update-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #update-form input,
+        #update-form textarea {
             padding: 10px;
-            margin: 10px 0;
+            width: calc(100% - 22px);
             border: 1px solid var(--input-border-color);
             border-radius: 5px;
-            width: calc(100% - 22px);
+            margin-bottom: 15px;
+            background: var(--background);
+            color: var(--text-color);
         }
 
-        #edit-profile button {
+        #update-form button[type="submit"] {
             padding: 10px 20px;
             background-color: var(--secondary-color);
             color: var(--text-color);
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.5s;
+            transition: background-color 0.3s ease;
         }
 
-        #edit-profile button:hover {
-            transform: scale(1.025);
+        #update-form button[type="submit"]:hover {
+            background-color: darken(var(--secondary-color), 10%);
         }
+
+        #profileBackBtn > span{
+            position: absolute;
+            top : 10px;
+            left: 5%;
+            z-index: 999;
+            cursor: pointer;
+        }
+
+        #mainContainer{
+            max-width: 1600px;
+            margin: auto;
+        }
+
     </style>
 </head>
 
 <body>
+
+   <section id="mainContainer">
+
     <div class="profile-container">
-        <h2>Profile Page</h2>
+
+        <div id="profileBackBtn">
+            <span onclick="window.location.href='index.html'" class="material-symbols-outlined">
+                arrow_back
+                </span>
+        </div>
+
+        <h1>My Profile</h1>
         <div class="profile-info">
-            <img id="profile-picture" src="https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=" alt="Profile Picture">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/037/336/395/small_2x/user-profile-flat-illustration-avatar-person-icon-gender-neutral-silhouette-profile-picture-free-vector.jpg" alt="Profile Picture">
             <div class="user-details">
-                <p><span>Name:</span> <span id="user-name"></span></p>
-                <p><span>Email:</span> <span id="user-email"></span></p>
-                <p><span>Phone:</span> <span id="user-phone"></span></p>
-                <p><span>Address:</span> <span id="user-address"></span></p>
-                <button id="update-button">Update</button>
+                <p>Name: <span id="name">John Doe</span></p>
+                <p>Phone: <span id="phone">09877309271</span></p>
+                <p>Address: <span id="address">add</span></p>
+                <!-- <p>Bio: <span id="bio">A short bio about myself.</span></p> -->
             </div>
         </div>
-        <div id="edit-profile">
-            <input type="text" id="edit-name" placeholder="Name">
-            <input type="email" id="edit-email" placeholder="Email">
-            <input type="text" id="edit-phone" placeholder="Phone">
-            <input type="text" id="edit-address" placeholder="Address">
-            <button id="save-button">Save</button>
-            <button id="cancel-button">Cancel</button>
-        </div>
+        <button id="update-button">Edit Profile</button>
         <button id="logout-button">Logout</button>
+        <button id="cancel-button" style="display:none;">Cancel</button>
+        <form id="update-form">
+            <label for="name-input">Name:</label>
+            <input type="text" id="name-input" name="name">
+            <label for="password-input">Password:</label>
+            <input type="password" id="password-input" name="password">
+            <label for="phone-input">Phone:</label>
+            <input type="text" id="phone-input" name="phone">
+            <label for="address-input">Address:</label>
+            <input type="text" id="address-input" name="address">
+            <!-- <label for="bio-input">Bio:</label>
+            <textarea id="bio-input" name="bio"></textarea> -->
+            <button type="submit">Save Changes</button>
+        </form>
     </div>
+   </section>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const profilePicture = document.getElementById('profile-picture');
-            const userName = document.getElementById('user-name');
-            const userEmail = document.getElementById('user-email');
-            const userPhone = document.getElementById('user-phone');
-            const userAddress = document.getElementById('user-address');
             const updateButton = document.getElementById('update-button');
-            const editProfile = document.getElementById('edit-profile');
-            const saveButton = document.getElementById('save-button');
             const cancelButton = document.getElementById('cancel-button');
             const logoutButton = document.getElementById('logout-button');
+            const updateForm = document.getElementById('update-form');
 
-            const editName = document.getElementById('edit-name');
-            const editEmail = document.getElementById('edit-email');
-            const editPhone = document.getElementById('edit-phone');
-            const editAddress = document.getElementById('edit-address');
+            // Replace with your JSON server URL
+            const API_URL = 'http://localhost:3000/users'; // <--- Change this to your JSON server users endpoint
 
-            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            // Fetch logged-in user data from the server
+            async function fetchUserData() {
+                try {
+                    const userId = localStorage.getItem('userId'); // Get user ID from localStorage
+                    const response = await fetch(`${API_URL}/${userId}`);
+                    const data = await response.json();
+                    document.getElementById('name').textContent = data.name;
+                    document.getElementById('phone').textContent = data.phone;
+                    document.getElementById('address').textContent = data.address;
+                    // document.getElementById('bio').textContent = data.bio;
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                }
+            }
 
-            if (loggedInUser) {
-                userName.textContent = loggedInUser.name;
-                userEmail.textContent = loggedInUser.email;
-                userPhone.textContent = loggedInUser.phone;
-                userAddress.textContent = loggedInUser.address;
-                editName.value = loggedInUser.name;
-                editEmail.value = loggedInUser.email;
-                editPhone.value = loggedInUser.phone;
-                editAddress.value = loggedInUser.address;
-            } else {
-                alert('No user logged in.');
-                window.location.href = 'login.html';
+            // Update user data on the server
+            async function updateUserData(userData) {
+                try {
+                    const userId = localStorage.getItem('userId'); // Get user ID from localStorage
+                    const response = await fetch(`${API_URL}/${userId}`, {
+                        method: 'PATCH', // Use PATCH for updating the resource
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    });
+                    if (!response.ok) {
+                        throw new Error('Failed to update user data');
+                    }
+                    // Reflect the changes in the UI
+                    document.getElementById('name').textContent = userData.name;
+                    document.getElementById('phone').textContent = userData.phone;
+                    document.getElementById('address').textContent = userData.address;
+                    // document.getElementById('bio').textContent = userData.bio;
+                    updateForm.style.display = 'none';
+                    cancelButton.style.display = 'none';
+                    updateButton.style.display = 'inline-block';
+                } catch (error) {
+                    console.error('Error updating user data:', error);
+                }
             }
 
             updateButton.addEventListener('click', () => {
-                editProfile.style.display = 'flex';
+                updateForm.style.display = 'block';
+                cancelButton.style.display = 'inline-block';
+                updateButton.style.display = 'none';
+                logoutButton.style.display = 'none';
+                const nameSpan = document.getElementById('name');
+                const phoneSpan = document.getElementById('phone');
+                const addressSpan = document.getElementById('address');
+                // const bioSpan = document.getElementById('bio');
+                document.getElementById('name-input').value = nameSpan.textContent;
+                document.getElementById('password-input').value = ''; // Password is not displayed for security reasons
+                document.getElementById('phone-input').value = phoneSpan.textContent;
+                document.getElementById('address-input').value = addressSpan.textContent;
+                // document.getElementById('bio-input').value = bioSpan.textContent;
             });
 
             cancelButton.addEventListener('click', () => {
-                editProfile.style.display = 'none';
+                updateForm.style.display = 'none';
+                cancelButton.style.display = 'none';
+                updateButton.style.display = 'inline-block';
+                logoutButton.style.display = 'inline-block';
             });
 
-            saveButton.addEventListener('click', () => {
-                const updatedUser = {
-                    ...loggedInUser,
-                    name: editName.value,
-                    email: editEmail.value,
-                    phone: editPhone.value,
-                    address: editAddress.value
+            updateForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const userData = {
+                    name: document.getElementById('name-input').value,
+                    password: document.getElementById('password-input').value,
+                    phone: document.getElementById('phone-input').value,
+                    address: document.getElementById('address-input').value,
+                    // bio: document.getElementById('bio-input').value
                 };
-
-                fetch(`http://localhost:3000/users/${loggedInUser.id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(updatedUser)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-                    userName.textContent = updatedUser.name;
-                    userEmail.textContent = updatedUser.email;
-                    userPhone.textContent = updatedUser.phone;
-                    userAddress.textContent = updatedUser.address;
-                    editProfile.style.display = 'none';
-                })
-                .catch(error => {
-                    console.error('Error updating profile:', error);
-                });
+                updateUserData(userData);
             });
 
             logoutButton.addEventListener('click', () => {
-                localStorage.removeItem('loggedInUser');
-                window.location.href = 'login.html';
+                localStorage.removeItem('userId'); // Remove user ID from localStorage
+                window.location.href = 'vibhorlogin.html'; // Redirect to login page
             });
+
+            // Fetch user data on page load
+            fetchUserData();
         });
     </script>
 </body>
+
 </html>

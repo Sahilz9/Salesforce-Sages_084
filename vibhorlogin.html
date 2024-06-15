@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
+
+        .container {
+            background-color: #444;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .toggle-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .toggle-button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #007BFF;
+            border: 2px solid #666;
+            color: white;
+            transition: border-bottom 0.3s, font-weight 0.3s;
+        }
+
+        .toggle-button.active {
+            border-bottom: 2px solid #666;
+            font-weight: bold;
+        }
+
+        .form {
+            display: none;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        input {
+            display: block;
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            width: calc(100% - 20px);
+            margin: 10px 10px 0 10px;
+            border: 1px solid #666;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .terms-container,
+        .confirmation-container {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .terms-container input,
+        .confirmation-container input {
+            display: inline-block;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .terms-container label,
+        .confirmation-container label {
+            display: inline-block;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 30px 50px;
+                max-width: 500px;
+            }
+
+            .toggle-button {
+                padding: 15px 30px;
+            }
+
+            input {
+                width: calc(100% - 40px);
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            button {
+                padding: 15px;
+                width: calc(100% - 40px);
+                margin: 15px 20px 0 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="toggle-container">
+                <button id="login-toggle" class="toggle-button active">Login</button>
+                <button id="signup-toggle" class="toggle-button">Signup</button>
+            </div>
+            <form id="login-form" class="form active">
+                <h2>Login</h2>
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <div class="terms-container">
+                    <input type="checkbox" id="login-terms" required>
+                    <label for="login-terms">I agree to the <a href="#">terms and conditions</a></label>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <form id="signup-form" class="form">
+                <h2>Signup</h2>
+                <input type="hidden" id="signup-id"> <!-- Hidden field for ID -->
+                <input type="text" id="signup-name" placeholder="Name" required>
+                <input type="email" id="signup-email" placeholder="Email" required>
+                <input type="password" id="signup-password" placeholder="Password" required>
+                <input type="text" id="signup-phone" placeholder="Phone Number" required>
+                <input type="text" id="signup-address" placeholder="City" required>
+                <div class="terms-container">
+                    <input type="checkbox" id="signup-terms" required>
+                    <label for="signup-terms">I agree to the <a href="#">terms and conditions</a></label>
+                </div>
+                <div class="confirmation-container">
+                    <input type="checkbox" id="signup-confirmation" required>
+                    <label for="signup-confirmation">I confirm my information is correct</label>
+                </div>
+                <button type="submit">Signup</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginToggle = document.getElementById('login-toggle');
+            const signupToggle = document.getElementById('signup-toggle');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+    
+            loginToggle.addEventListener('click', () => {
+                loginToggle.classList.add('active');
+                signupToggle.classList.remove('active');
+                loginForm.classList.add('active');
+                signupForm.classList.remove('active');
+            });
+    
+            signupToggle.addEventListener('click', () => {
+                signupToggle.classList.add('active');
+                loginToggle.classList.remove('active');
+                signupForm.classList.add('active');
+                loginForm.classList.remove('active');
+            });
+    
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+    
+                fetch('http://localhost:3000/users')
+                    .then(response => response.json())
+                    .then(users => {
+                        const user = users.find(user => user.email === email && user.password === password);
+                        if (user) {
+                            alert('Login successful!');
+                            localStorage.setItem('userId', user.id); // Store user ID in localStorage
+                            window.location.href = 'index.html'; // Redirect to landing page
+                        } else {
+                            alert('Invalid email or password.');
+                        }
+                    })
+                    .catch(error => console.error('Error logging in:', error));
+            });
+    
+            signupForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const name = document.getElementById('signup-name').value;
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+                const phone = document.getElementById('signup-phone').value;
+                const address = document.getElementById('signup-address').value;
+    
+                // Fetch all users to determine the next available ID
+                fetch('http://localhost:3000/users')
+                    .then(response => response.json())
+                    .then(users => {
+                        const maxId = users.reduce((max, user) => user.id > max ? user.id : max, 0);
+                        const newUserId = maxId + 1;
+    
+                        const newUser = {
+                            id: newUserId,
+                            name,
+                            email,
+                            password,
+                            phone,
+                            address
+                        };
+    
+                        fetch('http://localhost:3000/users', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(newUser)
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                alert('Signup successful!');
+                                localStorage.setItem('userId', data.id); // Store user ID in localStorage
+                                window.location.href = 'index.html'; // Redirect to landing page
+                            })
+                            .catch(error => console.error('Error signing up:', error));
+                    })
+                    .catch(error => console.error('Error fetching users:', error));
+            });
+        });
+    </script>
+    
+</body>
+
+</html>
