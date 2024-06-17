@@ -37,8 +37,7 @@ export function search() {
 
         <div class="movie-list">
           <div class="grid-list"></div>
-        </div>
-            `;
+        </div>`;
 
         for (const movie of MovieList) {
           const movieCard = createMovieCard(movie);
@@ -48,3 +47,20 @@ export function search() {
     }, 500);
   });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
