@@ -13,7 +13,7 @@ Technologies used in the project.
 
 ## Deployed App 
 ```bash
-pending
+https://delicate-cucurucho-42501a.netlify.app/
 ```
 
 ## Directory Structure
