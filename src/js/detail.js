@@ -16,7 +16,7 @@ async function getData() {
   let response = await fetch(`${movieDetailsAPI}`);
   let data = await response.json();
 
-  console.log(data);
+  // console.log(data);
 
   showData(data);
 }
@@ -24,6 +24,7 @@ async function getData() {
 getData();
 
 const pageContent = document.querySelector("[page-content]");
+
 
 sidebar();
 
