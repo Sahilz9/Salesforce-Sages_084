@@ -283,7 +283,7 @@
           const email = document.getElementById("login-email").value;
           const password = document.getElementById("login-password").value;
 
-          fetch("http://localhost:3000/users")
+          fetch("https://mock-api-2-5rm3.onrender.com/users")
             .then((response) => response.json())
             .then((users) => {
               const user = users.find(
@@ -309,7 +309,7 @@
           const address = document.getElementById("signup-address").value;
 
           // Fetch all users to determine the next available ID
-          fetch("http://localhost:3000/users")
+          fetch("https://mock-api-2-5rm3.onrender.com/users")
             .then((response) => response.json())
             .then((users) => {
               const maxId = users.reduce(
@@ -327,7 +327,7 @@
                 address,
               };
 
-              fetch("http://localhost:3000/users", {
+              fetch("https://mock-api-2-5rm3.onrender.com/users", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
