@@ -233,6 +233,7 @@ body {
 .poster-box {
   background-image: url("../images/poster-bg-icon.png");
   aspect-ratio: 2/3;
+  margin-left: -10px;
 }
 
 .poster-box,
