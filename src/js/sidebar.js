@@ -6,11 +6,6 @@ export function sidebar() {
   const genreList = {};
 
   fetchDataFromServer(`${genreAPI}`, function ({ genres }) {
-    // if (!genres) {
-    //   console.error("No genres found in the API response.");
-    //   return;
-    // }
-
     for (const { id, name } of genres) {
       genreList[id] = name;
     }
@@ -29,9 +24,9 @@ export function sidebar() {
     <div class="sidebar-list">
       <p class="title">Language</p>
 
-      <a href="./movie-list.html" menu-close class="sidebar-link">English</a>
-      <a href="./movie-list.html" menu-close class="sidebar-link">Hindi</a>
-      <a href="./movie-list.html" menu-close class="sidebar-link">Bengali</a>
+      <a href="#" menu-close class="sidebar-link">English</a>
+      <a href="#" menu-close class="sidebar-link">Hindi</a>
+      <a href="#" menu-close class="sidebar-link">Bengali</a>
     </div>
 
     <div class="sidebar-footer">
@@ -43,20 +38,13 @@ export function sidebar() {
     for (const [genreId, genreName] of Object.entries(genreList)) {
       const link = document.createElement("a");
       link.classList.add("sidebar-link");
-      link.setAttribute("href", "./movie-list.html");
-      link.setAttribute("menu-close", "");
-      // link.setAttribute("onclick", `getMovieList("with_genres=${genreId})", "${genreName}"`);
-
+      link.setAttribute("href", `./movie-list.html?genreId=${genreId}&genreName=${encodeURIComponent(genreName)}`);
+      link.setAttribute("data-genre-id", genreId);
       link.textContent = genreName;
       sidebarInner.querySelectorAll(".sidebar-list")[0].appendChild(link);
     }
 
     const sidebar = document.querySelector("[sidebar]");
-    // if (!sidebar) {
-    //   console.error("Sidebar element not found.");
-    //   return;
-    // }
-    
     sidebar.appendChild(sidebarInner);
     toggleSidebar(sidebar);
   };
@@ -66,11 +54,6 @@ export function sidebar() {
     const sidebarTogglers = document.querySelectorAll("[menu-toggler]");
     const sidebarClose = document.querySelectorAll("[menu-close]");
     const overlay = document.querySelector("[overlay]");
-
-    // if (!sidebarBtn || !overlay) {
-    //   console.error("Sidebar button or overlay not found.");
-    //   return;
-    // }
 
     addEventOnElements(sidebarTogglers, "click", function () {
       sidebar.classList.toggle("active");
