@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const genres = {
       28: "Action",
       12: "Adventure",
-      16: "Animation",
+      16: "Animated",
       35: "Comedy",
       80: "Crime",
       99: "Documentary",
